@@ -1,4 +1,4 @@
 * Podia Invoice Keys
-Podia changed CSV export format they use with Stripe. Previously a "Description" field contained the user-defined descriptive title. Now it's just a meaningless "Invoice #12345".
+Podia changed CSV export format they use with Stripe. Previously a ~Description~ field contained the user-defined descriptive title. Now it's just a meaningless ~Invoice #12345~.
 
 This script reads the Podia csv export and the Stripe csv export, gets the mapping from ~Invoice #~ to ~Description~ from the Podia csv and rewrites the corresponding fields in the Stripe csv. It writes an output file called ~output.csv~ which is essentially a modified version of the Stripe csv, but with the opaque invoice numbers replaced by human-readable descriptions.
