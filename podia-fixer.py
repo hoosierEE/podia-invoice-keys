@@ -20,7 +20,6 @@ def csv_to_dict(filename: str) -> (dict, csv.Dialect):
 def main(podia_path, stripe_path):
     podia, _ = csv_to_dict(podia_path)
     stripe, dialect = csv_to_dict(stripe_path)
-
     i2d = dict(zip(podia['Invoice #'], podia['Items']))
     desc = [i2d.get(x[9:], x) if x.startswith('Invoice #') else x for x in stripe['Description']]
     desc = []
@@ -31,7 +30,6 @@ def main(podia_path, stripe_path):
             desc.append(x)
 
     stripe['Description'] = desc  # replace column
-
     writer = csv.DictWriter(sys.stdout, fieldnames=stripe.keys(), dialect=dialect, quoting=csv.QUOTE_ALL)
     writer.writeheader()
     for t in zip(*stripe.values()):
