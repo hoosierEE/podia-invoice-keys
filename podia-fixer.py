@@ -1,5 +1,6 @@
-import csv
 import argparse
+import csv
+import sys
 
 
 def parse_args():
@@ -31,14 +32,12 @@ def main(podia_path, stripe_path):
 
     stripe['Description'] = desc  # replace column
 
-    with open('output.csv', 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=stripe.keys(), dialect=dialect, quoting=csv.QUOTE_ALL)
-        writer.writeheader()
-        for t in zip(*stripe.values()):
-            writer.writerow(dict(zip(stripe, t)))
+    writer = csv.DictWriter(sys.stdout, fieldnames=stripe.keys(), dialect=dialect, quoting=csv.QUOTE_ALL)
+    writer.writeheader()
+    for t in zip(*stripe.values()):
+        writer.writerow(dict(zip(stripe, t)))
 
     return stripe
-
 
 
 if __name__ == "__main__":
